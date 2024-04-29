@@ -43,13 +43,14 @@ class PersonRepo():
 
     def create_person(self, person: Person) -> Person:
         try:
-            db_person = self._map_to_schema(person)
-            self.db.add(db_person)
+            db_per = self._map_to_schema(person)
+            self.db.add(db_per)
             self.db.commit()
-            return self._map_to_model(db_person)
+            return self._map_to_model(db_per)
         except:
             traceback.print_exc()
             raise KeyError
+
 
 
     def delete_person_by_id(self, id: UUID) -> Person:
