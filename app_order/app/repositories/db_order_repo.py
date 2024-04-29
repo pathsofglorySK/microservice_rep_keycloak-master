@@ -19,6 +19,7 @@ class OrderRepo():
 
         return result
 
+
     def _map_to_schema(self, order: Order) -> DBOrder:
         data = dict(order)
         result = DBOrder(**data)

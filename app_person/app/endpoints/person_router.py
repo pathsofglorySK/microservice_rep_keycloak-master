@@ -14,7 +14,7 @@ from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from fastapi import Request
 
-person_router = APIRouter(prefix='/person', tags=['person'])
+person_router = APIRouter(prefix='/person', tags=['Person'])
 
 
 provider = TracerProvider()
