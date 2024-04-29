@@ -22,7 +22,7 @@ def first_person_data() -> tuple[UUID, str, str]:
 
 @pytest.fixture(scope='session')
 def second_person_data() -> tuple[UUID, str, str]:
-    return (uuid4(), uuid4(), 'test_person_type_2', 'test_person_info_1')
+    return (uuid4(), uuid4(), 'test_person_type_2', 'test_person_info_2')
 
 
 def test_empty_person(person_service: PersonService) -> None:
