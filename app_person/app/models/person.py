@@ -2,14 +2,14 @@ from datetime import datetime
 from uuid import UUID
 from uuid import UUID
 
-from pydantic import ConfigDict, BaseModel
+from pydantic import Config, BaseModel
 
 
 #from typing import Optional
 
 
 class Person(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+    model_config = Config(from_attributes=True)
 
     per_id: UUID
     ord_id: UUID

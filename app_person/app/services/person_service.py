@@ -8,7 +8,7 @@ from fastapi import Depends
 from app.models.person import Person
 from app.repositories.db_person_repo import PersonRepo
 
-
+from app_person.tests.unit.test_person_model import info
 
 
 class PersonService():

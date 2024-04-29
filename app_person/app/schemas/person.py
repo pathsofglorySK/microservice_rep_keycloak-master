@@ -12,3 +12,4 @@ class Person(Base):
     type = Column(String, nullable=False)
     info = Column(String, nullable=False)
 
+

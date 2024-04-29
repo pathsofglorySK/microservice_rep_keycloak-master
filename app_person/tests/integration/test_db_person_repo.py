@@ -23,16 +23,16 @@ def person_id() -> UUID:
 @pytest.fixture(scope='session')
 def first_person() -> Person:
     return Person(per_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),
-                    ord_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),
-                    type='test_per_type_1',
+                  ord_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),
+                  type='test_per_type_1',
                   info='test_per_info_1')
 
 
 @pytest.fixture(scope='session')
 def second_person() -> Person:
     return Person(per_id=UUID('45309954-8e3c-4635-8066-b342f634252c'),
-                    ord_id=UUID('45309954-8e3c-4635-8066-b342f634252c'),
-                    type='test_per_type_2',
+                  ord_id=UUID('45309954-8e3c-4635-8066-b342f634252c'),
+                  type='test_per_type_2',
                   info='test_per_info_2')
 
 
