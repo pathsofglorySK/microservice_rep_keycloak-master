@@ -42,3 +42,4 @@ def test_get_person_by_id() -> None:
 def test_get_person_by_id_error() -> None:
     with pytest.raises(KeyError):
         person_test_repo.get_person_by_id(uuid4())
+
