@@ -29,23 +29,21 @@ class OrderService():
         return self.order_repo.get_order_by_id(id)
 
     def accepted_order(self, id: UUID) -> Order:
-        from app.rabbitmq import send_to_document_queue
+        from app.rabbitmq import send_to_person_queue
         order = self.order_repo.get_order_by_id(id)
         if order.status != OrderStatus.CREATE:
             raise ValueError
 
         order.status = OrderStatus.ACCEPTED
 
-        document_data = {
-            "doc_id": uuid4(),
+        person_data = {
+            "per_id": uuid4(),
             "ord_id": id,
             "type": "Test Type",
-            "create_date": datetime.now(),
-            "doc": "Test Document",
-            "customer_info": order.customer_info
+
         }
 
-        asyncio.run(send_to_document_queue(document_data))
+        asyncio.run(send_to_person_queue(person_data))
 
         return self.order_repo.set_status(order)
 

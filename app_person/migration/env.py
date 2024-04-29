@@ -23,7 +23,7 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 
-# from app_document.app.schemas.document import Document
+# from app_person.app.schemas.person import person
 from app.schemas.base_schema import Base
 
 target_metadata = Base.metadata
@@ -49,7 +49,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = settings.postgres_url_doc
+    url = settings.postgres_url_per
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -69,7 +69,7 @@ def run_migrations_online() -> None:
 
     """
     configuration: dict[str, str] = config.get_section(config.config_ini_section) or {}
-    configuration['sqlalchemy.url'] = settings.postgres_url_doc
+    configuration['sqlalchemy.url'] = settings.postgres_url_per
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",

@@ -20,7 +20,7 @@ app.add_middleware(SessionMiddleware, secret_key='asas12334sadfdsf')
 
 MICROSERVICES = {
     "order": "http://localhost:80/api",
-    "document": "http://localhost:81/api",
+    "person": "http://localhost:81/api",
 }
 
 
@@ -150,39 +150,39 @@ def delete_order(id: UUID, request: Request, current_user: dict = Depends(get_us
     else:
         return proxy_request(service_name="order", path=f"/order/{id}/delete", user_info=current_user, request=request)
 
-#___DOCUMENT___
+#___PERSON___
 
-@staff_router.get("/document")
+@staff_router.get("/person")
 def read_order(request: Request, current_user: dict = Depends(get_user_role)):
     if current_user['id'] == '':
         request.session['prev_url'] = str(request.url)
         return RedirectResponse(url=auth_url)
     else:
-        return proxy_request(service_name="document", path="/document/", user_info=current_user, request=request)
+        return proxy_request(service_name="person", path="/person/", user_info=current_user, request=request)
 
-@staff_router.get("/document/{id}")
+@staff_router.get("/person/{id}")
 def read_order_by_id(id: UUID, request: Request, current_user: dict = Depends(get_user_role)):
     if current_user['id'] == '':
         request.session['prev_url'] = str(request.url)
         return RedirectResponse(url=auth_url)
     else:
-        return proxy_request(service_name="document", path=f"/document/{id}", user_info=current_user, request=request)
+        return proxy_request(service_name="person", path=f"/person/{id}", user_info=current_user, request=request)
 
-@user_router.get("/document/{id}")
+@user_router.get("/person/{id}")
 def read_order_by_id(id: UUID, request: Request, current_user: dict = Depends(get_user_role)):
     if current_user['id'] == '':
         request.session['prev_url'] = str(request.url)
         return RedirectResponse(url=auth_url)
     else:
-        return proxy_request(service_name="document", path=f"/document/{id}", user_info=current_user, request=request)
+        return proxy_request(service_name="person", path=f"/person/{id}", user_info=current_user, request=request)
 
-@staff_router.post('/document/{id}/delete')
+@staff_router.post('/person/{id}/delete')
 def delete_order(id: UUID, request: Request, current_user: dict = Depends(get_user_role)):
     if current_user['id'] == '':
         request.session['prev_url'] = str(request.url)
         return RedirectResponse(url=auth_url)
     else:
-        return proxy_request(service_name="document", path=f"/document/{id}/delete", user_info=current_user, request=request)
+        return proxy_request(service_name="person", path=f"/person/{id}/delete", user_info=current_user, request=request)
 
 
 app.include_router(auth_router)

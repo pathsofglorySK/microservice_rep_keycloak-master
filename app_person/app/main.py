@@ -6,12 +6,12 @@ from fastapi import FastAPI
 
 from app import rabbitmq
 # from app.endpoints.order_router import order_router
-from app.endpoints.document_router import document_router
+from app.endpoints.person_router import person_router
 
 app = FastAPI(title='Service')
 
 #app.include_router(order_router, prefix='/api')
-app.include_router(document_router, prefix='/api')
+app.include_router(person_router, prefix='/api')
 
 
 @app.on_event('startup')

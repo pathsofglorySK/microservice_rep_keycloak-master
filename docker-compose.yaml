@@ -15,10 +15,10 @@ services:
   #   networks:
   #     - app
 
-  # postgres-document:
+  # postgres-person:
   #   image: postgres:latest
   #   environment:
-  #     POSTGRES_DB: microservice_db_document
+  #     POSTGRES_DB: microservice_db_person
   #     POSTGRES_USER: postgres
   #     POSTGRES_PASSWORD: 3572
   #     POSTGRES_PORT: 5433 # Порт базы данных внутри контейнера
@@ -26,7 +26,7 @@ services:
   #   ports:
   #     - "5433:5433"
   #   volumes:
-  #     - postgres_data_document:/var/lib/postgresql/data
+  #     - postgres_data_person:/var/lib/postgresql/data
   #   networks:
   #     - app
 
@@ -56,14 +56,14 @@ services:
     networks:
       - app
 
-  app_document:
+  app_person:
     build:
-      context: ./app_document
+      context: ./app_person
       dockerfile: ./Dockerfile
     ports:
       - "81:81"
     # depends_on:
-    #   - postgres-document
+    #   - postgres-person
     #   - rabbitmq
     labels:
       logging: "promtail"
@@ -106,4 +106,4 @@ networks:
   # name: app
 volumes:
   postgres_data_order:
-  postgres_data_document:
+  postgres_data_person:

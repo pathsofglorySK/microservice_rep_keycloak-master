@@ -9,11 +9,9 @@ from aio_pika.abc import AbstractRobustConnection
 from app.settings import settings
 
 
-#from app_document.app.services.document_service import DocumentService
-#from app_document.app.repositories.db_document_repo import DocumentRepo
 
 
-async def send_to_document_queue(data: dict):
+async def send_to_person_queue(data: dict):
     try:
         # Установка соединения с RabbitMQ
         connection = await aio_pika.connect_robust(settings.amqp_url)
@@ -23,7 +21,7 @@ async def send_to_document_queue(data: dict):
             channel = await connection.channel()
 
             # Объявление очереди, если её нет
-            queue = await channel.declare_queue('document_created_queue', durable=True)
+            queue = await channel.declare_queue('person_created_queue', durable=True)
 
             for key, value in data.items():
                 if isinstance(value, UUID):
@@ -34,7 +32,7 @@ async def send_to_document_queue(data: dict):
             # Отправка данных в очередь
             await channel.default_exchange.publish(
                 aio_pika.Message(body=json.dumps(data).encode()),
-                routing_key='document_created_queue'
+                routing_key='person_created_queue'
             )
             print(" [x] Sent %r" % data)
 
@@ -46,12 +44,12 @@ async def send_to_document_queue(data: dict):
         await connection.close()
 
 
-# async def process_created_document(msg: IncomingMessage):
+# async def process_created_person(msg: IncomingMessage):
 #     try:
 #         data = json.loads(msg.body.decode())
-#         print("\n/// process_created_document ///\n ")
-#         DocumentService(DocumentRepo()).create_document(
-#             data['ord_id'], data['type'], data['doc'], data['customer_info'])
+#         print("\n/// process_created_person ///\n ")
+#         PersonService(PersonRepo()).create_person(
+#             data['ord_id'], data['type'], data['per'], data['customer_info'])
 #         await msg.ack()
 #     except:
 #         traceback.print_exc()
@@ -62,9 +60,9 @@ async def consume(loop: AbstractEventLoop) -> AbstractRobustConnection:
     connection = await aio_pika.connect_robust(settings.amqp_url, loop=loop)
     channel = await connection.channel()
 
-    document_created_queue = await channel.declare_queue('document_created_queue', durable=True)
+    person_created_queue = await channel.declare_queue('person_created_queue', durable=True)
 
-    #await document_created_queue.consume(process_created_document)
+    #await person_created_queue.consume(process_created_person)
 
     print('Started RabbitMQ consuming...')
 

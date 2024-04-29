@@ -2,8 +2,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Header
 
-from app.models.document import Document, CreateDocumentRequest
-from app.services.document_service import DocumentService
+from app.models.person import Person, CreatePersonRequest
+from app.services.person_service import PersonService
 import prometheus_client
 from opentelemetry import trace
 from opentelemetry.sdk.resources import Resource
@@ -14,7 +14,7 @@ from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from fastapi import Request
 
-document_router = APIRouter(prefix='/document', tags=['Document'])
+person_router = APIRouter(prefix='/person', tags=['person'])
 
 
 provider = TracerProvider()
@@ -75,72 +75,48 @@ def admin(role):
         return True
     return False
 
-# @document_router.get('/')
-# def get_document(document_service: DocumentService = Depends(DocumentService)) -> list[Document]:
-#     return document_service.get_document()
 
-@document_router.get('/')
-def get_document(document_service: DocumentService = Depends(DocumentService), user: str = Header(...)) -> list[Document]:
+@person_router.get('/')
+def get_person(person_service: PersonService = Depends(PersonService), user: str = Header(...)) -> list[Person]:
     try:
         user = eval(user)
         with tracer.start_as_current_span("Get deliveries"):
             if user['id'] is not None:
                 if admin(user['role']):
                     get_deliveries_count.inc(1)
-                    return document_service.get_document()
+                    return person_service.get_person()
                 raise HTTPException(403)
     except KeyError:
             raise HTTPException(404, f'Order with id={id} not found')
 
 
-# @document_router.get('/{id}')
-# def get_document_by_id(document_service: DocumentService = Depends(DocumentService)) -> list[Document]:
-#     return document_service.get_document()
 
-@document_router.get('/{id}')
-def get_document_by_id(id: UUID, document_service: DocumentService = Depends(DocumentService), user: str = Header(...)) -> Document:
+
+@person_router.get('/{id}')
+def get_person_by_id(id: UUID, person_service: PersonService = Depends(PersonService), user: str = Header(...)) -> Person:
     try:
         user = eval(user)
         with tracer.start_as_current_span("Get deliveries"):
             if user['id'] is not None:
                 if user_admin(user['role']):
                     get_deliveries_count.inc(1)
-                    return document_service.get_document_by_id(id)
+                    return person_service.get_person_by_id(id)
                 raise HTTPException(403)
     except KeyError:
         raise HTTPException(404, f'Order with id={id} not found')
 
-# @document_router.post('/')
-# def add_document(
-#         document_info: CreateDocumentRequest,
-#         order_service: DocumentService = Depends(DocumentService)
-# ) -> Document:
-#     try:
-#         document = order_service.create_document(document_info.ord_id, document_info.type, document_info.doc,
-#                                                  document_info.customer_info)
-#         return document.dict()
-#     except KeyError:
-#         raise HTTPException(400, f'Order with id={document_info.doc_id} already exists')
 
 
-# @document_router.post('/{id}/delete')
-# def delete_document(id: UUID, document_service: DocumentService = Depends(DocumentService)) -> Document:
-#     try:
-#         document = document_service.delete_document(id)
-#         return document.dict()
-#     except KeyError:
-#         raise HTTPException(404, f'Document with id={id} not found')
-
-@document_router.post('/{id}/delete')
-def delete_document(id: UUID, document_service: DocumentService = Depends(DocumentService),user: str = Header(...)) -> Document:
+@person_router.post('/{id}/delete')
+def delete_person(id: UUID, person_service: PersonService = Depends(PersonService), user: str = Header(...)) -> Person:
     try:
         user = eval(user)
         with tracer.start_as_current_span("Get deliveries"):
             if user['id'] is not None:
                 if admin(user['role']):
                     get_deliveries_count.inc(1)
-                    document = document_service.delete_document(id)
-                    return document.dict()
+                    person = person_service.delete_person(id)
+                    return person.dict()
             raise HTTPException(403)
     except KeyError:
         raise HTTPException(404, f'Order with id={id} not found')

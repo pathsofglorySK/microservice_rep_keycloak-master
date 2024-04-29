@@ -4,7 +4,7 @@
 # class Settings(BaseSettings):
 #     amqp_url: str
 #     postgres_url_ord: str
-#     postgres_url_doc: str
+#     postgres_url_per: str
 #
 #     model_config = SettingsConfigDict(env_file='.env')
 #
@@ -31,8 +31,8 @@ class Settings(BaseSettings):
     amqp_url: str = os.getenv("AMQP_URL")
     print(f"\n\n AMQP_URL: {amqp_url}\n\n")
 
-    postgres_url_doc: str = os.getenv("POSTGRES_URL_DOC")
-    print(f"\n\n POSTGRES_URL_DOC: {postgres_url_doc}\n\n")
+    postgres_url_per: str = os.getenv("POSTGRES_URL_PER")
+    print(f"\n\n POSTGRES_URL_PER: {postgres_url_per}\n\n")
 
 
 settings = Settings()

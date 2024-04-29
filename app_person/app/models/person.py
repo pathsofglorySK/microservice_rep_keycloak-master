@@ -8,19 +8,16 @@ from pydantic import ConfigDict, BaseModel
 #from typing import Optional
 
 
-class Document(BaseModel):
+class Person(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    doc_id: UUID
+    per_id: UUID
     ord_id: UUID
     type: str
-    customer_info: str
-    create_date: datetime
-    doc: str
 
 
-class CreateDocumentRequest(BaseModel):
+
+class CreatePersonRequest(BaseModel):
+    per_id: UUID
     ord_id: UUID
     type: str
-    doc: str
-    customer_info: str
