@@ -20,7 +20,6 @@ class OrderStatus(enum.Enum):
 class Order(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    # ord_id: UUID
     ord_id: UUID
     status: OrderStatus
     address_info: str
