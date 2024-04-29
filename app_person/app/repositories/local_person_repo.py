@@ -11,35 +11,36 @@ from typing import Optional
 #              type='test_per_type_2'),
 # ]
 
+persons = []
 
 class PersonRepo():
     def __init__(self, clear: bool = False) -> None:
         if clear:
-            person.clear()
+            persons.clear()
 
     def get_person(self) -> list[Person]:
-        return person
+        return persons
 
 
 
     def get_person_by_id(self, id: UUID) -> Person:
-        for d in person:
+        for d in persons:
             if d.per_id == id:
                 return d
 
         raise KeyError
 
     def create_person(self, per: Person) -> Person:
-        if len([d for d in person if d.per_id == per.per_id]) > 0:
+        if len([d for d in persons if d.per_id == per.per_id]) > 0:
             raise KeyError
 
-        person.append(per)
+        persons.append(per)
         return per
 
     def delete_per(self, id: UUID) -> Optional[Person]:
-        for i, person in enumerate(Person):
+        for i, person in enumerate(persons):
             if person.per_id == id:
-                deleted_person = person.pop(i)
+                deleted_person = persons.pop(i)
                 return deleted_person
 
         return None

@@ -25,11 +25,11 @@ class PersonRepo():
         return result
 
     def get_person(self) -> list[Person]:
-        person = []
+        persons = []
         for d in self.db.query(DBPerson).all():
-            person.append(self._map_to_model(d))
+            persons.append(self._map_to_model(d))
 
-        return person
+        return persons
 
     def get_person_by_id(self, id: UUID) -> Person:
         person = self.db \
@@ -50,6 +50,16 @@ class PersonRepo():
         except:
             traceback.print_exc()
             raise KeyError
+
+    def delete_all_person(self) -> None:
+        try:
+            # Delete all orders from the database
+            self.db.query(DBPerson).delete()
+            self.db.commit()
+        except Exception as e:
+            print(f"An error occurred while deleting all person: {e}")
+            self.db.rollback()
+            raise
 
 
 
