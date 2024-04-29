@@ -17,15 +17,17 @@ def test_empty_list() -> None:
 
 def test_add_first_person() -> None:
     person = Person(per_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),
-                        ord_id=uuid4(),
-                        type='test_per_type_1')
+                    ord_id=uuid4(),
+                    type='test_per_type_1',
+                    info='test_per_info_1')
     assert person_test_repo.create_person(person) == person
 
 
 def test_add_first_person_repeat() -> None:
     person = Person(per_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),
-                        ord_id=uuid4(),
-                        type='test_per_type_1')
+                    ord_id=uuid4(),
+                    type='test_per_type_1',
+                    info='test_per_info_1')
     # person_test_repo.create_person(person)
     with pytest.raises(KeyError):
         person_test_repo.create_person(person)
@@ -33,8 +35,9 @@ def test_add_first_person_repeat() -> None:
 
 def test_get_person_by_id() -> None:
     person = Person(per_id=uuid4(),
-                        ord_id=uuid4(),
-                        type='test_per_type_1')
+                    ord_id=uuid4(),
+                    type='test_per_type_1',
+                    info='test_per_info_1')
     person_test_repo.create_person(person)
     assert person_test_repo.get_person_by_id(person.per_id) == person
 
