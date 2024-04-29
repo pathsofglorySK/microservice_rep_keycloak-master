@@ -26,7 +26,7 @@ class PersonService():
         return self.person_repo.get_person_by_id(id)
 
     def create_person(self, ord_id: UUID, type: str) -> Person:
-        person = Person(per_id=uuid4(), ord_id=ord_id, type=type)
+        person = Person(per_id=uuid4(), ord_id=ord_id, type=type, info=info)
 
         return self.person_repo.create_person(person)
 
