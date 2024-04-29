@@ -5,6 +5,8 @@ import pytest
 from app.repositories.local_person_repo import PersonRepo
 from app.services.person_service import PersonService
 
+from app_person.tests.unit.test_person_model import ord_id
+
 
 @pytest.fixture(scope='session')
 def person_service() -> PersonService:
