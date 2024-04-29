@@ -43,6 +43,7 @@ class OrderService():
 
         }
 
+
         asyncio.run(send_to_person_queue(person_data))
 
         return self.order_repo.set_status(order)
