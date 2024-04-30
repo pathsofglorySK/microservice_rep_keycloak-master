@@ -7,7 +7,7 @@ from app.repositories.local_person_repo import PersonRepo
 from app.services.person_service import PersonService
 
 #from app_person.tests.unit.test_person_model import per_id, ord_id, type
-from app_person.tests.unit.test_person_model import info
+#from app_person.tests.unit.test_person_model import info
 
 
 @pytest.fixture(scope='session')
