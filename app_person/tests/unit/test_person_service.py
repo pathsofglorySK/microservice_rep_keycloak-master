@@ -22,7 +22,7 @@ def first_person_data() -> tuple[UUID, str]:
 
 @pytest.fixture(scope='session')
 def second_person_data() -> tuple[UUID, str]:
-    return (uuid4(), uuid4(), 'test_person_type_2')
+    return (uuid4(), 'test_person_type_2')
 
 
 def test_empty_person(person_service: PersonService) -> None:
@@ -33,7 +33,7 @@ def test_create_first_person(
         first_person_data: tuple[UUID, str],
         person_service: PersonService
 ) -> None:
-    ord_id, type
+    ord_id, type = first_person_data
     person = person_service.create_person(ord_id, type)
 
     assert person.ord_id == ord_id
@@ -43,11 +43,10 @@ def test_create_first_person(
 
 def test_create_second_person(
         second_person_data: tuple[UUID, str],
-        person_service
+        person_service: PersonService
 ) -> None:
-    ord_id, type
+    ord_id, type = second_person_data
     person = person_service.create_person(ord_id, type)
-
     assert person.ord_id == ord_id
     assert person.type == type
 
@@ -56,7 +55,7 @@ def test_create_second_person(
 def test_get_person_full(
         first_person_data: tuple[UUID, str],
         second_person_data: tuple[UUID, str],
-        person_service
+        person_service: PersonService
 ) -> None:
     persons = person_service.get_person()
     assert len(persons) == 2
