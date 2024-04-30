@@ -68,3 +68,4 @@ async def consume(loop: AbstractEventLoop) -> AbstractRobustConnection:
 
     return connection
 
+

@@ -70,3 +70,4 @@ def test_add_second_person(first_person: Person, second_person: Person, person_r
 def test_delete_created_order(first_person: Person, second_person: Person, person_repo: Person) -> None:
     assert person_repo.delete_person_by_id(first_person.per_id) == first_person
     assert person_repo.delete_person_by_id(second_person.per_id) == second_person
+

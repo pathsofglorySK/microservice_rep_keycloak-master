@@ -66,3 +66,4 @@ def test_get_person_full(
     assert persons[1].ord_id == second_person_data[0]
     assert persons[1].type == second_person_data[1]
 
+

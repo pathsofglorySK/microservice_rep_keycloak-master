@@ -37,3 +37,4 @@ def test_person_ord_id_required():
     with pytest.raises(ValidationError):
         Person(per_id=uuid4(),
                type='test_per_type_1')
+

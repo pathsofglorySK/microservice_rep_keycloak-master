@@ -22,3 +22,4 @@ class CreatePersonRequest(BaseModel):
     ord_id: UUID
     type: str
 
+
