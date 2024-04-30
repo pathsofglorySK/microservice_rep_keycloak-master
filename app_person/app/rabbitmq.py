@@ -49,7 +49,7 @@ async def process_created_person(msg: IncomingMessage):
         data = json.loads(msg.body.decode())
         print("\n/// process_created_person ///\n ")
         PersonService(PersonRepo()).create_person(
-            data['ord_id'], data['type'], data['info'])
+            data['ord_id'], data['type'])
         await msg.ack()
     except:
         traceback.print_exc()

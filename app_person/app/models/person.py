@@ -14,11 +14,11 @@ class Person(BaseModel):
     per_id: UUID
     ord_id: UUID
     type: str
-    info: str
+
 
 
 
 class CreatePersonRequest(BaseModel):
     ord_id: UUID
     type: str
-    info: str
+

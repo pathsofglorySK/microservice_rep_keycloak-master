@@ -10,6 +10,5 @@ class Person(Base):
     per_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
     ord_id = Column(UUID(as_uuid=True), nullable=False)
     type = Column(String, nullable=False)
-    info = Column(String, nullable=False)
 
 
