@@ -35,7 +35,7 @@ trace.get_tracer_provider().add_span_processor(
   BatchSpanProcessor(jaeger_exporter)
 )
 
-name='Delivery Service'
+name='express'
 tracer = trace.get_tracer(name)
 
 

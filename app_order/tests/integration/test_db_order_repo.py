@@ -36,9 +36,9 @@ def second_order() -> Order:
                  order_info='test_order_info_1')
 
 
-# def test_empty_list(order_repo: OrderRepo) -> None:
-#     order_repo.delete_all_orders()
-#     assert order_repo.get_order() == []
+def test_empty_list(order_repo: OrderRepo) -> None:
+    order_repo.delete_all_orders()
+    assert order_repo.get_order() == []
 
 
 def test_add_first_order(first_order: Order, order_repo: OrderRepo) -> None:
