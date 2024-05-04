@@ -18,26 +18,26 @@ auth_router = APIRouter(prefix='/auth', tags=['auth'])
 logging.basicConfig()
 
 
-def get_user_role(request: Request):
-    token = request.session.get('auth_token')
-    headers = {"Authorization": f"Bearer {token}"}
-    user = {'role': '', 'id': '', 'username': ''}
-    # return user
-    try:
-        print(httpx.get(keycloak_user_info_url, headers=headers).json())
-        roles = httpx.get(keycloak_user_info_url, headers=headers).json()
-        print(f"\n\nUSER_ROLE={roles}\n\n")
-        if 'service_admin' in roles["realm_access"]["roles"]:
-            user['role'] = "service_admin"
-        elif "service_user" in roles["realm_access"]["roles"]:
-            user['role'] = "service_user"
-        if roles["sub"]:
-            user['id'] = roles["sub"]
-        user['username'] = roles['preferred_username']
-        return user
-    except:
-        request.session['id'] = None
-        return user
+# def get_user_role(request: Request):
+#     token = request.session.get('auth_token')
+#     headers = {"Authorization": f"Bearer {token}"}
+#     user = {'role': '', 'id': '', 'username': ''}
+#     # return user
+#     try:
+#         print(httpx.get(keycloak_user_info_url, headers=headers).json())
+#         roles = httpx.get(keycloak_user_info_url, headers=headers).json()
+#         print(f"\n\nUSER_ROLE={roles}\n\n")
+#         if 'service_admin' in roles["realm_access"]["roles"]:
+#             user['role'] = "service_admin"
+#         elif "service_user" in roles["realm_access"]["roles"]:
+#             user['role'] = "service_user"
+#         if roles["sub"]:
+#             user['id'] = roles["sub"]
+#         user['username'] = roles['preferred_username']
+#         return user
+#     except:
+#         request.session['id'] = None
+#         return user
 
 
 def _get_token(request: Request):
