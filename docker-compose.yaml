@@ -61,7 +61,7 @@ services:
       context: ./app_person
       dockerfile: ./Dockerfile
     ports:
-      - "81:81"
+      - "8080"
     # depends_on:
     #   - postgres-person
     #   - rabbitmq
