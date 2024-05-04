@@ -76,49 +76,29 @@ def admin(role):
     return False
 
 
+
+
 @person_router.get('/')
-def get_person(person_service: PersonService = Depends(PersonService), user: str = Header(...)) -> list[Person]:
+def get_person(person_service: PersonService = Depends(PersonService)) -> list[Person]:
+    return person_service.get_person()
+
+
+@person_router.post('/')
+def add_order(
+        person_info: CreatePersonRequest,
+        order_service: PersonService = Depends(PersonService)
+) -> Person:
     try:
-        user = eval(user)
-        with tracer.start_as_current_span("Get deliveries"):
-            if user['id'] is not None:
-                if admin(user['role']):
-                    get_deliveries_count.inc(1)
-                    return person_service.get_person()
-                raise HTTPException(403)
+        person = order_service.create_person(person_info.ord_id, person_info.type)
+        return person.dict()
     except KeyError:
-            raise HTTPException(404, f'Order with id={id} not found')
-
-
-
-
-@person_router.get('/{id}')
-def get_person_by_id(id: UUID, person_service: PersonService = Depends(PersonService), user: str = Header(...)) -> Person:
-    try:
-        user = eval(user)
-        with tracer.start_as_current_span("Get deliveries"):
-            if user['id'] is not None:
-                if user_admin(user['role']):
-                    get_deliveries_count.inc(1)
-                    return person_service.get_person_by_id(id)
-                raise HTTPException(403)
-    except KeyError:
-        raise HTTPException(404, f'Order with id={id} not found')
-
+        raise HTTPException(400, f'Order with id={person_info.per_id} already exists')
 
 
 @person_router.post('/{id}/delete')
-def delete_person(id: UUID, person_service: PersonService = Depends(PersonService), user: str = Header(...)) -> Person:
+def delete_order(id: UUID, person_service: PersonService = Depends(PersonService)) -> Person:
     try:
-        user = eval(user)
-        with tracer.start_as_current_span("Get deliveries"):
-            if user['id'] is not None:
-                if admin(user['role']):
-                    get_deliveries_count.inc(1)
-                    person = person_service.delete_person(id)
-                    return person.dict()
-            raise HTTPException(403)
+        person = person_service.delete_person(id)
+        return person.dict()
     except KeyError:
-        raise HTTPException(404, f'Order with id={id} not found')
-    except ValueError:
-        raise HTTPException(400, f'Order with id={id} can\'t be deleted')
+        raise HTTPException(404, f'Person with id={id} not found')
