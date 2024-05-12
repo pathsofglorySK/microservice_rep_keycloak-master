@@ -116,5 +116,6 @@ jobs:
             AMQP_URL=amqp://guest:guest123@51.250.26.59:5672/
             
             
+            
 
 
