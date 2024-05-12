@@ -72,7 +72,7 @@ jobs:
 
       - name: Build and push app_order service image
         run: |
-          docker push malllekyla/app_order:latest
+          docker push pathsofglory228/app_order:latest
     
   build-and-push-to-yc:
     name: Build and push to YandexCloud Registry
@@ -111,8 +111,8 @@ jobs:
           revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/malllekyla/delivery_service/app_person:latest
           revision-service-account-id: ${{ secrets.YC_SA_ID }}
           revision-env: |
-            POSTGRES_URL_ORD=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/plotnikov_microservice_db_order
-            POSTGRES_URL_PER=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/plotnikov_microservice_db_person
+            POSTGRES_URL_ORD=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/kislukhin_microservice_db_order
+            POSTGRES_URL_PER=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/kislukhin_microservice_db_person
             AMQP_URL=amqp://guest:guest123@51.250.26.59:5672/
             
 
