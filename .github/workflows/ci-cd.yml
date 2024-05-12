@@ -83,7 +83,7 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build ./app_person -f ./app_person/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/malllekyla/delivery_service/app_person:latest
+          docker build ./app_person -f ./app_person/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/pathsofglory228/delivery_service/app_person:latest
 
       - name: Login to YC Registry
         uses: docker/login-action@v3.0.0
@@ -94,7 +94,7 @@ jobs:
 
       - name: Push tag YC Registry
         run: |
-          docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/malllekyla/delivery_service/app_person:latest
+          docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/pathsofglory228/delivery_service/app_person:latest
 
 
   deploy:
@@ -108,7 +108,7 @@ jobs:
           yc-sa-json-credentials: ${{ secrets.YC_KEYS }}
           container-name: ${{ secrets.YC_CONTAINER_NAME }}
           folder-id: ${{ secrets.YC_FOLDER_ID }}
-          revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/malllekyla/delivery_service/app_person:latest
+          revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/pathsofglory228/delivery_service/app_person:latest
           revision-service-account-id: ${{ secrets.YC_SA_ID }}
           revision-env: |
             POSTGRES_URL_ORD=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/kislukhin_microservice_db_order
