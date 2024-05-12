@@ -115,5 +115,6 @@ jobs:
             POSTGRES_URL_PER=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/kislukhin_microservice_db_person
             AMQP_URL=amqp://guest:guest123@51.250.26.59:5672/
             
+            
 
 
